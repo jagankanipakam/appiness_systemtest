@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>{{userName |uppercase}} Repositories</h2>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>S.no</th>
+        <th>Repository Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="repositoriesList.length==0; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <tr>
+          <td colspan="2 ">No Repositories Available
+            <div class="spinner-grow spinner-grow-sm"></div>
+
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <tr *ngFor="let repository of repositoriesList;index as i" style="cursor: pointer;">
+          <td>{{i+1}}</td>
+          <td>{{repository.repositoryName}}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>

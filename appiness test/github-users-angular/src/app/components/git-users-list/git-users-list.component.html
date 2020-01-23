@@ -1,0 +1,38 @@
+<div class="container">
+  <h2>Users List</h2>
+  <input [(ngModel)]="searchText" class="form-control" id="userName" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>S.no</th>
+        <th>User Name</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      <ng-container *ngIf="UsersList.length==0; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <tr>
+          <td colspan="2 ">No Users Available</td>
+
+        </tr>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <tr *ngFor="let user of UsersList|userSearch:searchText;index as i" (click)="gotoUserRepository(user.userName)" style="cursor: pointer;">
+          <td>{{i+1}}</td>
+          <td>{{user.userName}}</td>
+        </tr>
+        <tr *ngIf="(UsersList|userSearch:searchText).length==0">
+          <td colspan="2">No User Is associated With that user name
+          </td>
+
+        </tr>
+      </ng-template>
+
+
+
+    </tbody>
+  </table>
+</div>
